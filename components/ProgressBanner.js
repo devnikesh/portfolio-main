@@ -6,9 +6,8 @@ const ProgressBanner = () => {
     <div
       style={{
         background: '#FEFCE8',
-        // padding: '1px',
         textAlign: 'center',
-        // color: '#FFFFFF',
+        zIndex: 1,
         fontSize: '11px',
         position: 'fixed',
         top: 0,
