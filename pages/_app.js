@@ -5,7 +5,8 @@ import '../styles/main.css'
 import Script from 'next/script'
 
 export default function Nextra({ Component, pageProps }) {
-  const MEASUREMENT_ID = process.env.MEASUREMENT_ID
+  const shouldTrack = process.env.NODE_ENV === 'production'
+
   return (
     <>
       <Head>
@@ -24,20 +25,25 @@ export default function Nextra({ Component, pageProps }) {
         />
       </Head>
 
-      <Script
-        strategy="afterInteractive"
-        src={`https://www.googletagmanager.com/gtag/js?id=${MEASUREMENT_ID}`}
-      />
-      <Script id="google-analytics" strategy="afterInteractive">
-        {` 
+      {shouldTrack ? (
+        <>
+          <Script
+            strategy="afterInteractive"
+            src={`https://www.googletagmanager.com/gtag/js?id=G-3C9HJTFZVX`}
+          />
+          <Script id="google-analytics" strategy="afterInteractive">
+            {` 
                window.dataLayer = window.dataLayer || [];
                function gtag(){dataLayer.push(arguments);}
                gtag('js', new Date());
              
-               gtag('config', ${MEASUREMENT_ID});
+               gtag('config', 'G-3C9HJTFZVX');
              
           `}
-      </Script>
+          </Script>
+        </>
+      ) : null}
+
       <Component {...pageProps} />
     </>
   )
